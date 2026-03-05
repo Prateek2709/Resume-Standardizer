@@ -1,0 +1,18 @@
+# DOCX-only setup (no LibreOffice/Gotenberg converter service)
+# Run: docker compose up --build
+# App: http://localhost:8501
+
+services:
+  app:
+    build: .
+    image: resume-standardizer-streamlit:latest
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    volumes:
+      # Persist generated outputs
+      - ./output:/app/output
+      # Optional: if you want to edit template on host without rebuilding image
+      - ./templates:/app/templates
+    restart: unless-stopped
