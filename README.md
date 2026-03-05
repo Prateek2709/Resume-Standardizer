@@ -36,6 +36,8 @@ For each resume, the system generates:
 - Candidate summary Excel file
 - LLM usage logs (both in the terminal and on a LangSmith dashboard, if connected)
 
+> Create an empty **output** folder in the same directory as the code files
+
 ## Tech Stack
 - Frontend: Streamlit
 - AI: Azure OpenAI
@@ -46,11 +48,20 @@ For each resume, the system generates:
 
 ## Running the Application
 Add the required credentials in the **.env** file.
+### Local Run
 ```
 pip install -r requirements.txt
 streamlit run app_docx_output.py
 ```
 Then open:
+```
+http://localhost:8501
+```
+### Docker Run
+```
+docker compose up --build
+```
+The app will be available at:
 ```
 http://localhost:8501
 ```
