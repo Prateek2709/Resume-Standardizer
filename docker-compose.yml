@@ -1,4 +1,4 @@
-# DOCX-only setup (no LibreOffice/Gotenberg converter service)
+# DOCX-only setup
 # Run: docker compose up --build
 # App: http://localhost:8501
 
