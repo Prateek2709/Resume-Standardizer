@@ -1,5 +1,5 @@
 # AI Resume Parser & Standardizer
-An AI-powered application that converts unstructured resumes (PDF/DOCX) into structured, company-standardized resumes using Azure OpenAI, Streamlit, and custom DOCX templates.
+This application converts unstructured resumes (PDF/DOCX) into structured, company-standardized resumes using Azure OpenAI, Streamlit, and custom DOCX templates.
 
 The system extracts candidate information, generates standardized resumes, and produces structured tables for quick HR screening.
 
