@@ -14,6 +14,7 @@ The system extracts candidate information, generates standardized resumes, produ
 - Generates two versions:
   - Company Version – internal format
   - Non-Company Version – external/client format
+  - Clean Version - retains exact resume format and content, but wothout decorators like borders, page numbers, underlines, hyperlinks, etc
 
 ### Clean Resume Generation
 Generates a clean version of the original resume that preserves the content and layout while removing visual decorations such as:
