@@ -22,7 +22,6 @@ from openai import AzureOpenAI
 import streamlit as st
 import streamlit.components.v1 as components
 
-from langsmith import traceable
 from phoenix.otel import register
 
 from firm_resume_docx_only import render_firm_resume, postprocess_docx_spacing
@@ -482,7 +481,6 @@ def build_dynamic_skill_matrix(firm_json: dict) -> pd.DataFrame:
     return df
 
 
-@traceable(name='load_pdf_bytes')
 def load_pdf_bytes(pdf_bytes: bytes) -> str:
     """Extract text from a PDF provided as bytes (no file saved to disk)."""
     text = ""
@@ -493,7 +491,6 @@ def load_pdf_bytes(pdf_bytes: bytes) -> str:
     return text
 
 
-@traceable(name='load_docx_bytes')
 def load_docx_bytes(docx_bytes: bytes) -> str:
     """Extract text from a DOCX resume provided as bytes (includes headers, footers, and tables)."""
     from docx import Document
@@ -858,7 +855,6 @@ def _merge_extracted_full(parts: list[dict]) -> dict:
     return out
 
 
-@traceable(name='chat_completion_with_retry')
 def _chat_completion_with_retry(
     messages,
     *,
@@ -959,7 +955,6 @@ def _sanitize_for_docx(value):
 
 # ------------------------- LLM Call #2: UI/Table enrichment -------------------------
 
-@traceable(name='enrich_ui_fields_via_llm')
 def enrich_ui_fields_via_llm(parsed_data: dict, resume_text: str, run_dir: Path, template_df: pd.DataFrame | None = None) -> dict:
     """Second LLM call focused on UI table fields (education + screening fields)."""
     resume_text = _truncate_for_llm(resume_text)
@@ -1065,7 +1060,6 @@ def enrich_ui_fields_via_llm(parsed_data: dict, resume_text: str, run_dir: Path,
     return enrich
 
 
-@traceable(name='parse_resume')
 def parse_resume(text: str, run_dir: Path) -> dict:
     text = _truncate_for_llm(text)
     prompt = f"""
@@ -1202,7 +1196,6 @@ def parse_resume(text: str, run_dir: Path) -> dict:
     return parsed_data
 
 
-@traceable(name='extract_full_resume_via_llm')
 def extract_full_resume_via_llm(resume_text: str, run_dir: Path) -> dict:
     """
     Stage A: Extract EVERYTHING of importance from the resume into a canonical structure
@@ -1273,7 +1266,6 @@ def extract_full_resume_via_llm(resume_text: str, run_dir: Path) -> dict:
     return full
 
 
-@traceable(name='to_firm_json')
 def to_firm_json(base_json: dict, resume_text: str, run_dir: Path, extracted_full: dict | None = None) -> dict:
     """Convert parsed resume JSON + resume text into Company firm-resume JSON for DOCX placeholders."""
     NOT_AVAILABLE_LOCAL = "Not available"
@@ -1606,7 +1598,6 @@ def to_firm_json(base_json: dict, resume_text: str, run_dir: Path, extracted_ful
     return firm_json
 
 
-@traceable(name='apply_excel_styling')
 def apply_excel_styling(file_path: str) -> None:
     workbook = load_workbook(file_path)
     sheet = workbook.active
@@ -1635,7 +1626,6 @@ def apply_excel_styling(file_path: str) -> None:
     workbook.save(file_path)
 
 
-@traceable(name='profile_summary_excel')
 def profile_summary_excel(out_xlsx_path: str, parsed_data: dict) -> str:
     """
     Creates a single-resume Excel output in the given path.
