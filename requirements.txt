@@ -9,3 +9,4 @@ reportlab
 python-docx
 requests
 pyodbc
+arize-phoenix-otel
