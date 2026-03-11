@@ -61,7 +61,7 @@ For each resume, the system generates:
 ## Tech Stack
 - Frontend: Streamlit
 - AI: Azure OpenAI
-- Observability: Arize Phoenix, LangSmith (optional)
+- Observability: Arize Phoenix (optional)
 - Document Processing: pdfplumber, python-docx, docxtpl
 - Database: Azure SQL
 - Containerization: Docker
